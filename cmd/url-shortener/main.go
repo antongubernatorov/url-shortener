@@ -29,7 +29,13 @@ func main() {
 		os.Exit(1)
 	}
 
-	_ = storage
+	url, err := storage.GetUrl("url-shortener.com")
+	log.Info("retrieved URL from storage", url)
+
+	err = storage.DeleteUrl("url-shortener.com")
+	if err != nil {
+		log.Error("failed to delete URL", sl.Err(err))
+	}
 }
 
 func setupLogger(env string) *slog.Logger {
